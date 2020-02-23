@@ -10,9 +10,9 @@
 #include "../includes/scheduler.h"
 #include <queue>
 
-	std::queue<PCB> *ready_q;
-	bool preemptive;
-	int time_slice;
+//	std::queue<PCB> *ready_q;
+//	bool preemptive;
+//	int time_slice;
 
 //	Scheduler::Scheduler(std::queue<PCB> &queue, bool preemptive = false, int time_slice =
 //					UNINITIALIZED) :	ready_q(&queue), preemptive(preemptive), time_slice(time_slice){
@@ -26,6 +26,9 @@
 		ready_q->push(p);
 	}
 	PCB Scheduler::getNext(){
+		if(ready_q->empty()){
+			return PCB();
+		}
 		return ready_q->front();
 	}
 	bool Scheduler::isEmpty(){
@@ -33,6 +36,7 @@
 	}
 	bool Scheduler::time_to_switch_processes(int tick_count, PCB &p){
 		if(p.remaining_cpu_time == 0){
+			ready_q->pop();
 			return true;
 		}
 		return false;
