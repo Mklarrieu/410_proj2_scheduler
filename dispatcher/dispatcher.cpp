@@ -26,13 +26,10 @@
 		is_valid_job_on_cpu = true;
 	}
 	bool Dispatcher::isValidJobOnCPU(){
-//		 if(cpu->get_COPY_of_Current_Process().process_number == UNINITIALIZED){
-//			 is_valid_job_on_cpu = false;
-//		 }
-//		 else{
-//			 is_valid_job_on_cpu = true;
-//		 }
-		 return is_valid_job_on_cpu;
+		PCB currentJob= cpu->get_COPY_of_Current_Process();
+		if(currentJob.isEmpty())
+			return false;
+		return true;
 	}
 
 

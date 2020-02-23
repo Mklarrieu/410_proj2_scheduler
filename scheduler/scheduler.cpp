@@ -29,17 +29,19 @@
 		if(ready_q->empty()){
 			return PCB();
 		}
-		return ready_q->front();
+		PCB p = ready_q->front();
+		ready_q->pop();
+		return p;
 	}
 	bool Scheduler::isEmpty(){
 		return ready_q->empty();
 	}
 	bool Scheduler::time_to_switch_processes(int tick_count, PCB &p){
-		if(p.remaining_cpu_time == 0){
-			ready_q->pop();
-			return true;
+		if(p.remaining_cpu_time > 0 ){
+//			ready_q->pop();
+			return false;
 		}
-		return false;
+		return true;
 	}
 
 

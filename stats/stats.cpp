@@ -8,6 +8,7 @@
 //TODO fill in content
 #include "../includes/stats.h"
 #include <vector>
+#include <iostream>
 
 float av_wait_time;
 float av_turnaround_time;
@@ -23,6 +24,13 @@ std::vector<PCB> *vec;
 	}
 //	Stats::~Stats(){}
 	void Stats::showAllProcessInfo(){
+		for(int i = 0; i < vec->size(); i++){
+			PCB p;
+			p = vec->at(i);
+			std::cout <<  "Process " + std::to_string(p.process_number) + " Required CPU time:"
+					+ std::to_string(p.required_cpu_time) + " arrived:" + std::to_string(p.arrival_time) +
+					" started:" + std::to_string(p.start_time) + " finished:" + std::to_string(p.finish_time) <<std::endl;
+		}
 	}
 
 	float Stats::get_av_response_time(){
